@@ -4,8 +4,6 @@ const _difference = require('lodash/difference');
 
 util.inspect.defaultOptions.maxArrayLength = null;
 
-
-
 (async () => {
     const followers = getProfiles('followers');
     const following = getProfiles('following');
@@ -26,6 +24,7 @@ util.inspect.defaultOptions.maxArrayLength = null;
 */
 
 function getProfiles(type) {
+    return console.log('get profiles');
     const START_OF_NEW_PROF = 's profile picture';
     const entries = fs
         .readFileSync(`./parser/${type}`)
