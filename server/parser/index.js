@@ -41,7 +41,10 @@ function getProfiles(type) {
     const profiles = [];
     let currProfile = [];
 
-    for (let i = 0; i < entries.length; i++) {
+    for (let i = 1; i < entries.length; i++) {
+        if (i === entries.length - 1) {
+            profiles.push(currProfile);
+        }
         // if (i % 3 === 0) {
         if (entries[i].indexOf(START_OF_NEW_PROF) > 0) {
             profiles.push(currProfile);
@@ -53,13 +56,30 @@ function getProfiles(type) {
 
     // console.log(profiles, profiles.length);
 
+    const asdf = {};
+
     profiles.forEach(async (x, idx) => {
-        (function(idx) {
-            setTimeout(function() {
-                console.log('value is ', x);
-            }, 3000 * (idx + 1));
-        })(idx);
+        // (function(idx) {
+        //     setTimeout(function() {
+        //         console.log(x.length);
+        //     }, 300 * (idx + 1));
+        // })(idx);
+
+        if (asdf[x.length]) {
+            ++asdf[x.length];
+        } else {
+            asdf[x.length] = 1;
+        }
     });
+
+    console.log({
+        aaa: profiles.length,
+        first: profiles[0],
+        last: profiles[profiles.length - 1]
+    });
+
+    const erty = profiles.map(x => x[1].replace('\r', ''));
+    console.log({ erty });
 
     return;
 
