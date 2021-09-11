@@ -7,7 +7,7 @@ const cors = require('cors');
 const Knex = require('knex');
 const knexConfig = require('./knexfile');
 require('colors');
-require('./parser');
+// require('./parser');
 
 dotenv.config();
 // Model.knex(Knex(knexConfig[process.env.NODE_ENV]));

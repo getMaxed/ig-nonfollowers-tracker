@@ -8,15 +8,19 @@ util.inspect.defaultOptions.maxArrayLength = null;
 (async () => {
     const followers = getProfiles('followers');
     const following = getProfiles('following');
-    return;
 
-    const target = _difference(following, followers);
-    console.log({ 'Non Followers List': target });
+    const nonFollowers = _difference(following, followers);
+
+    console.log({ 'Non Followers List': followers.length });
+    console.log({ 'I Follow': following.length });
+    console.log({ 'Follow Me': followers.length });
+    console.log({ 'Non Followers': nonFollowers.length });
 
     fs.writeFileSync(
-        'non-followers',
-        target.map((u, idx) => `${idx + 1}. ${u}`).join('\n')
+        './parser/OUTPUT-unfollowers',
+        nonFollowers.map((u, idx) => `${idx + 1}. ${u}`).join('\n')
     );
+    // return;
 })();
 
 /*
@@ -70,9 +74,7 @@ function getProfiles(type) {
 
     // logArrItemWithDelay(profiles, 2000);
 
-    const result = profiles.map(x => x[1] && x[1].replace('\r', ''));
-    console.log({ [type]: result.length });
-    return result;
+    return profiles.map(x => x[1] && x[1].replace('\r', ''));
 
     // let n = 0;
 
