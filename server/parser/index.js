@@ -1,14 +1,14 @@
 const fs = require('fs');
 const util = require('util');
 const _difference = require('lodash/difference');
+const logArrItemWithDelay = require('../utils/logArrItemWithDelay');
 
 util.inspect.defaultOptions.maxArrayLength = null;
 
 (async () => {
     const followers = getProfiles('followers');
-    return;
-
     const following = getProfiles('following');
+    return;
 
     const target = _difference(following, followers);
     console.log({ 'Non Followers List': target });
@@ -59,12 +59,6 @@ function getProfiles(type) {
     const asdf = {};
 
     profiles.forEach(async (x, idx) => {
-        // (function(idx) {
-        //     setTimeout(function() {
-        //         console.log(x.length);
-        //     }, 300 * (idx + 1));
-        // })(idx);
-
         if (asdf[x.length]) {
             ++asdf[x.length];
         } else {
@@ -72,16 +66,13 @@ function getProfiles(type) {
         }
     });
 
-    console.log({
-        aaa: profiles.length,
-        first: profiles[0],
-        last: profiles[profiles.length - 1]
-    });
+    // console.log(profiles);
 
-    const erty = profiles.map(x => x[1].replace('\r', ''));
-    console.log({ erty });
+    // logArrItemWithDelay(profiles, 2000);
 
-    return;
+    const result = profiles.map(x => x[1] && x[1].replace('\r', ''));
+    console.log({ [type]: result.length });
+    return result;
 
     // let n = 0;
 
