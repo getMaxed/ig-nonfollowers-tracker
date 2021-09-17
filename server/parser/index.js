@@ -5,16 +5,43 @@ const logArrItemWithDelay = require('../utils/logArrItemWithDelay');
 
 util.inspect.defaultOptions.maxArrayLength = null;
 
+/*
+|--------------------------------------------------------------------------
+| SORTER
+|--------------------------------------------------------------------------
+*/
+
+// (async () => {
+//     const entries = fs
+//         .readFileSync(`./parser/sorter`)
+//         .toString()
+//         .split('\n')
+//         .map(x => x.split(' ')[1])
+//         .sort();
+
+//     fs.writeFileSync(
+//         './parser/OUTPUT-sorted',
+//         entries.map((u, idx) => `${idx + 1}. ${u}`).join('\n')
+//     );
+
+//     console.log({ entries });
+// })();
+
+// return;
+
 (async () => {
     const followers = getProfiles('followers');
     const following = getProfiles('following');
 
     const nonFollowers = _difference(following, followers);
 
-    console.log({ 'Non Followers List': followers.length });
     console.log({ 'I Follow': following.length });
     console.log({ 'Follow Me': followers.length });
     console.log({ 'Non Followers': nonFollowers.length });
+
+    // console.log({ following });
+    // console.log({ followers });
+    // console.log({ nonFollowers });
 
     fs.writeFileSync(
         './parser/OUTPUT-unfollowers',
@@ -45,7 +72,7 @@ function getProfiles(type) {
     const profiles = [];
     let currProfile = [];
 
-    for (let i = 1; i < entries.length; i++) {
+    for (let i = 0; i < entries.length; i++) {
         if (i === entries.length - 1) {
             profiles.push(currProfile);
         }
